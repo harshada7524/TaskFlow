@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-brand: #635bff;
+  --color-brand-dark: #4b43d6;
+  --color-ink: #20243a;
+  --color-muted: #747b91;
+  --color-surface: #ffffff;
+  --color-canvas: #f5f7fb;
+  --color-line: #e7eaf2;
+
+  --font-body: Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-card: 18px;
+  --radius-control: 10px;
+  --shadow-soft: 0 12px 35px rgba(32, 36, 58, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+button, input {
+  font: inherit;
+}

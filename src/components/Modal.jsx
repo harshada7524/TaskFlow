@@ -7,10 +7,16 @@ export default function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+    <div
+      className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4"
+      onClick={onClose}
+    >
+      <div
+        className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
 
-        <h2 className="text-xl font-bold mb-4">
+        <h2 className="text-xl font-bold mb-4 text-purple-800">
           {title}
         </h2>
 
@@ -20,7 +26,7 @@ export default function Modal({
 
         <button
           onClick={onClose}
-          className="bg-purple-600 text-white px-4 py-2 rounded-xl"
+          className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl"
         >
           Close
         </button>

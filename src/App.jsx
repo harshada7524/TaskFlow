@@ -6,7 +6,10 @@ import TaskCard from "./components/TaskCard";
 import Modal from "./components/Modal";
 import Avatar from "./components/Avatar";
 import Badge from "./components/Badge";
-
+import ProgressChart from "./components/ProgressChart";
+import CompletionChart from "./components/CompletionChart";
+import TimelineChart from "./components/TimelineChart";
+import KanbanBoard from "./componennts/KanbanBorad";
 const projects = [
   {
     id: 1,
@@ -78,6 +81,30 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [activePage, setActivePage] = useState("Home");
   const [search, setSearch] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState([
+  {
+    id: 1,
+    title: "Design homepage",
+    description: "Create homepage UI",
+    status: "To Do",
+    priority: "High"
+  },
+  {
+    id: 2,
+    title: "Build dashboard",
+    description: "Complete dashboard charts",
+    status: "In Progress",
+    priority: "Medium"
+  },
+  {
+    id: 3,
+    title: "Test application",
+    description: "Check application features",
+    status: "Completed",
+    priority: "Low"
+  }
+]);
 
   const navItems = [
     { name: "Home", icon: "🏠" },
@@ -305,6 +332,7 @@ function App() {
 
           {/* DAY 4 DASHBOARD */}
           {activePage === "Dashboard" && (
+
             <div className="space-y-8">
 
               <div>
@@ -349,6 +377,15 @@ function App() {
                   ))}
                 </div>
               </section>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <ProgressChart />
+                <CompletionChart />
+              </div>
+
+               <div className="mt-6">
+                <TimelineChart />
+             </div>
+             <KanbanBoard tasks={tasks} setTasks={setTasks} />
 
               {/* PROJECT LIST */}
               <section className="bg-white rounded-3xl p-6 shadow-lg border border-purple-100">

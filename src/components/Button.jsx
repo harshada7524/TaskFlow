@@ -13,6 +13,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
+      
       disabled={disabled}
       className={`px-4 py-2.5 rounded-xl font-semibold ${styles[variant]}`}
     >

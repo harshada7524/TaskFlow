@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Button from "./components/Button";
 import Input from "./components/Input";
@@ -9,7 +9,7 @@ import Badge from "./components/Badge";
 import ProgressChart from "./components/ProgressChart";
 import CompletionChart from "./components/CompletionChart";
 import TimelineChart from "./components/TimelineChart";
-import KanbanBoard from "./componennts/KanbanBorad";
+import KanbanBoard from "./components/KanbanBoard";
 const projects = [
   {
     id: 1,
@@ -81,7 +81,6 @@ function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [activePage, setActivePage] = useState("Home");
   const [search, setSearch] = useState("");
-  const [tasks, setTasks] = useState([]);
   const [tasks, setTasks] = useState([
   {
     id: 1,
@@ -105,6 +104,20 @@ function App() {
     priority: "Low"
   }
 ]);
+   const [theme, setTheme] = useState(() => {
+  return localStorage.getItem("taskflow-theme") || "light";
+});
+
+useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("taskflow-theme", theme);
+}, [theme]);
+
+const toggleTheme = () => {
+  setTheme((prevTheme) =>
+    prevTheme === "light" ? "dark" : "light"
+  );
+};
 
   const navItems = [
     { name: "Home", icon: "🏠" },
@@ -154,13 +167,11 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-pink-100 p-4 md:p-8">
-
+      <div className="app-shell min-h-screen p-4 md:p-8 transition-colors duration-300">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[230px_1fr] gap-6">
 
         {/* SIDEBAR */}
-        <aside className="bg-white/90 rounded-3xl p-6 shadow-xl border border-white">
-
+           <aside className="theme-panel rounded-3xl p-6 shadow-xl border">
           <h2 className="text-2xl font-extrabold text-purple-700 mb-10">
             ✨ TaskFlow
           </h2>
@@ -222,12 +233,20 @@ function App() {
                 />
               </div>
 
-              <div className="flex items-center gap-3 bg-white rounded-2xl px-4 py-2 shadow-sm">
-                <Avatar name="TaskFlow User" />
-                <span className="font-semibold text-gray-700 whitespace-nowrap">
-                  TaskFlow User
-                </span>
-              </div>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+
+  <button
+    onClick={toggleTheme}
+    className="theme-toggle px-4 py-3 rounded-xl font-semibold shadow-sm"
+  >
+    {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+  </button>
+
+  <div className="theme-panel flex items-center gap-3 rounded-2xl px-4 py-2 shadow-sm">
+    <Avatar name="TaskFlow User" />
+  </div>
+
+</div>
 
             </div>
           </header>

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* LIGHT THEME */
 :root {
   --color-brand: #635bff;
   --color-brand-dark: #4b43d6;
@@ -10,6 +11,8 @@
   --color-surface: #ffffff;
   --color-canvas: #f5f7fb;
   --color-line: #e7eaf2;
+  --color-accent-bg: #f3e8ff;
+  --color-accent-text: #6b21a8;
 
   --font-body: Arial, sans-serif;
 
@@ -26,18 +29,133 @@
   --shadow-soft: 0 12px 35px rgba(32, 36, 58, 0.07);
 }
 
+/* DARK THEME */
+:root[data-theme="dark"] {
+  --color-brand: #a78bfa;
+  --color-brand-dark: #8b5cf6;
+  --color-ink: #f1f5f9;
+  --color-muted: #a1a1b5;
+  --color-surface: #242438;
+  --color-canvas: #151525;
+  --color-line: #3b3b52;
+  --color-accent-bg: #35294d;
+  --color-accent-text: #d8b4fe;
+
+  --shadow-soft: 0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
   min-width: 320px;
+  font-family: var(--font-body);
   background: var(--color-canvas);
   color: var(--color-ink);
-  font-family: var(--font-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-button, input {
+button,
+input,
+textarea,
+select {
   font: inherit;
+}
+
+/* MAIN APP BACKGROUND */
+.app-shell {
+  background: linear-gradient(
+    135deg,
+    var(--color-canvas),
+    var(--color-accent-bg)
+  );
+  color: var(--color-ink);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* THEME-AWARE PANELS */
+.theme-panel {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-color: var(--color-line);
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-accent-bg);
+  transform: translateY(-2px);
+}
+
+/* DARK MODE TAILWIND COLOR OVERRIDES */
+:root[data-theme="dark"] .bg-white,
+:root[data-theme="dark"] .bg-white\/90 {
+  background-color: var(--color-surface) !important;
+}
+
+:root[data-theme="dark"] .text-gray-800,
+:root[data-theme="dark"] .text-gray-700,
+:root[data-theme="dark"] .text-gray-600,
+:root[data-theme="dark"] .text-gray-500,
+:root[data-theme="dark"] .text-purple-950,
+:root[data-theme="dark"] .text-purple-900,
+:root[data-theme="dark"] .text-purple-800,
+:root[data-theme="dark"] .text-purple-700 {
+  color: var(--color-ink) !important;
+}
+
+:root[data-theme="dark"] .text-gray-400 {
+  color: var(--color-muted) !important;
+}
+
+:root[data-theme="dark"] .border-purple-100,
+:root[data-theme="dark"] .border-purple-200,
+:root[data-theme="dark"] .border-white {
+  border-color: var(--color-line) !important;
+}
+
+:root[data-theme="dark"] .bg-purple-50,
+:root[data-theme="dark"] .bg-purple-100,
+:root[data-theme="dark"] .bg-purple-200 {
+  background-color: var(--color-accent-bg) !important;
+}
+
+:root[data-theme="dark"] .hover\:bg-purple-50:hover {
+  background-color: var(--color-accent-bg) !important;
+}
+
+/* INPUTS */
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] textarea,
+:root[data-theme="dark"] select {
+  background-color: var(--color-surface);
+  color: var(--color-ink);
+  border-color: var(--color-line);
+}
+
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder {
+  color: var(--color-muted);
+}
+
+/* SMOOTH TRANSITIONS */
+.theme-panel,
+.app-shell,
+.theme-toggle,
+aside,
+main section {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
